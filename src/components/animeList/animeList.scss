@@ -1,0 +1,20 @@
+.cards {
+  gap: 20px;
+  max-width: 1000px
+}
+
+.anime-card {
+  max-width: 300px;
+  background: #74a8da;
+}
+
+.nav-filters {
+  width: 300px;
+}
+
+.btn-more {
+  display: block !important;
+  justify-content: center;
+  margin: 40px auto 0 auto;
+  padding: 10px 50px !important;
+}
