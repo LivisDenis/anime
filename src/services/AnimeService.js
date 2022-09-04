@@ -15,13 +15,6 @@ const AnimeService = () => {
         return _transformAnime(data.data[0].attributes)
     }
 
-    const getSearchAnime = async (name) => {
-        const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${name}`)
-
-        const data = await response.json()
-        return _transformAnime(data.data[0].attributes)
-    }
-
     const _transformAnime = (name) => {
         return {
             titles: name.titles.en || name.titles.en_jp,
@@ -30,12 +23,11 @@ const AnimeService = () => {
             status: name.status,
             startDate: name.startDate,
             averageRating: name.averageRating,
-            episodeCount: name.episodeCount,
-            slug: name.slug
+            episodeCount: name.episodeCount
         }
     }
 
-    return {getAnime, getOneAnime, getSearchAnime}
+    return {getAnime, getOneAnime}
 }
 
 export default AnimeService

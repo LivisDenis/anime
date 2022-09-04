@@ -1,23 +1,30 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AnimeService from "../../services/AnimeService";
 import {Link} from "react-router-dom";
 
 import './animeList.scss';
 import {Context} from "../../index";
 import {useAuthState} from "react-firebase-hooks/auth";
-import Loader from "../loader/Loader";
-import {addFavourite} from "./animeSlice";
-import {useDispatch, useSelector} from "react-redux";
 
-const AnimeList = ({setOffset}) => {
+const AnimeList = ({addFavourite}) => {
     const {auth} = useContext(Context)
     const [user] = useAuthState(auth)
-    const {getOneAnime} = AnimeService()
-    const animeData = useSelector(state => state.animeSlice.dataAnime)
-    const dispatch = useDispatch()
+    const [anime, setAnime] = useState([])
+    const [offset, setOffset] = useState(0)
+    const {getAnime} = AnimeService()
 
-    const addFavourites = (title) => {
-        getOneAnime(title).then(res => dispatch(addFavourite(res)))
+    useEffect(() => {
+        onRequest(offset)
+        // eslint-disable-next-line
+    }, [])
+
+    const onRequest = (offset) => {
+        getAnime(offset).then(onAnimeLoading)
+    }
+
+    const onAnimeLoading = (newItems) => {
+        setAnime(anime => [...anime, ...newItems])
+        setOffset(offset => offset + 6)
     }
 
     const renderCards = (anime) => {
@@ -39,13 +46,7 @@ const AnimeList = ({setOffset}) => {
                         <hr/>
                         <div className="btns d-flex justify-content-between">
                             <Link to={`/anime/${slug}`} className="btn btn-primary mt-auto">View</Link>
-                            <button
-                                disabled={!user}
-                                onClick={() => addFavourites(slug)}
-                                className="btn btn-danger"
-                            >
-                                Add to favourite
-                            </button>
+                            <button disabled={!user} onClick={() => addFavourite(slug)} className="btn btn-danger">Add to favourite</button>
                         </div>
                     </div>
                 </div>
@@ -53,22 +54,16 @@ const AnimeList = ({setOffset}) => {
         })
 
         return (
-            <div className="cards">
-                <div className='d-flex align-content-start flex-wrap gap-5'>
-                    {items}
-                </div>
-                <button onClick={() => setOffset(offset => offset + 6)} className='btn btn-primary text-center btn-more'>MORE</button>
+            <div className="cards d-flex align-content-start justify-content-between flex-wrap">
+                {items}
+                <button onClick={() => onRequest(offset)} className='btn btn-primary text-center btn-more'>MORE</button>
             </div>
         )
     }
 
-    if (animeData.length === 0) return <Loader/>
-
-    const elements = renderCards(animeData)
+    const elements = renderCards(anime)
     return (
         <div>
-            <h2>Anime</h2>
-            <hr/>
             {elements}
         </div>
     );

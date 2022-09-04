@@ -3,7 +3,6 @@ import {Link, useParams} from "react-router-dom";
 
 import './animePage.scss';
 import AnimeService from "../../services/AnimeService";
-import Loader from "../loader/Loader";
 
 const AnimePage = () => {
     const {animeId} = useParams()
@@ -11,14 +10,14 @@ const AnimePage = () => {
     const [dataAnime, setDataAnime] = useState([])
 
     useEffect(() => {
-        getOneAnime(animeId).then(res => setDataAnime(res))
-        // onRequest(animeId)
+        onRequest(animeId)
     }, [])
 
-    // const onRequest =  (animeId) => {
-    //     getOneAnime(animeId).then(res => setDataAnime(res))
-    // }
-    if (dataAnime.length === 0) return <Loader/>
+    const onRequest =  (animeId) => {
+        getOneAnime(animeId).then(res => setDataAnime(res))
+    }
+
+    // console.log(dataAnime)
 
     const {titles, description, posterImage, status, startDate, averageRating, episodeCount} = dataAnime
     return (
@@ -34,10 +33,7 @@ const AnimePage = () => {
                         <p className="single-anime__descr">Status: {status}</p>
                     </div>
                 </div>
-                <div>
-                    <h3>About {titles}:</h3>
-                    <p className="single-anime__descr">{description}</p>
-                </div>
+                <p className="single-anime__descr">{description}</p>
             </div>
             <Link to='/' className="single-anime__back">Back to all</Link>
         </div>
