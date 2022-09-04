@@ -10,6 +10,7 @@ function App() {
     const {auth} = useContext(Context)
     const [user, loading] = useAuthState(auth)
     const [favouriteList, setFavouriteList] = useState([])
+    console.log(123)
 
     return (
         <BrowserRouter>
