@@ -18,17 +18,6 @@ export const fetchAnime = createAsyncThunk(
 
 )
 
-export const fetchSearchAnime = createAsyncThunk(
-    'anime/fetchAnime',
-    async (name ) => {
-        const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${name}`)
-
-        const data = await response.json()
-        return data.data
-    }
-
-)
-
 const animeSlice = createSlice({
     name: 'anime',
     initialState,
