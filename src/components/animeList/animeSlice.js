@@ -18,17 +18,6 @@ export const fetchAnime = createAsyncThunk(
 
 )
 
-export const fetchSearchAnime = createAsyncThunk(
-    'anime/fetchAnime',
-    async (name ) => {
-        const response = await fetch(`https://kitsu.io/api/edge/anime?filter[text]=${name}`)
-
-        const data = await response.json()
-        return data.data
-    }
-
-)
-
 const animeSlice = createSlice({
     name: 'anime',
     initialState,
@@ -38,10 +27,7 @@ const animeSlice = createSlice({
         },
         deleteAnime: (state, action) => {
             state.favourites = state.favourites.filter(item => item.slug !== action.payload)
-        },
-        // searchAnime: (state, action) => {
-        //     state.dataAnime = state.dataAnime.filter(item => item.titles !== action.payload)
-        // }
+        }
     },
     extraReducers: builder => {
         builder
@@ -55,22 +41,12 @@ const animeSlice = createSlice({
             .addCase(fetchAnime.rejected, state => {
                 state.animeLoadingStatus = 'error'
             })
-            // .addCase(fetchSearchAnime.pending, state => {
-            //     state.animeLoadingStatus = 'loading'
-            // })
-            // .addCase(fetchSearchAnime.fulfilled, (state, action) => {
-            //     state.animeLoadingStatus = 'idle'
-            //     state.dataAnime = action.payload
-            // })
-            // .addCase(fetchSearchAnime.rejected, state => {
-            //     state.animeLoadingStatus = 'error'
-            // })
             .addDefaultCase(() => {})
     }
 })
 
 const {actions, reducer} = animeSlice
 
-export const {addFavourite, deleteAnime, searchAnime} = actions
+export const {addFavourite, deleteAnime} = actions
 
 export default reducer

@@ -1,24 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch} from "react-redux";
 import AnimeService from "../../services/AnimeService";
-import {fetchSearchAnime} from "../animeList/searchSlice";
 
 const SearchAnime = () => {
     const [value, setValue] = useState('')
     const dispatch = useDispatch()
-    const {getSearchAnime} = AnimeService()
-    const [anime, setAnime] = useState([])
-
-
-    // useEffect(() => {
-    //     searchAnime()
-    // }, [value])
 
     const search = (e) => {
         setValue(e.target.value)
-        dispatch(fetchSearchAnime(e.target.value))
     }
-
 
     return (
         <div className="input-group flex-nowrap">

@@ -1,26 +1,27 @@
 import Navbar from "../navbar/Navbar";
 import {BrowserRouter} from "react-router-dom";
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import AppRouter from "../appRouter/AppRouter";
 import {Context} from "../../index";
 import {useAuthState} from "react-firebase-hooks/auth";
 import Loader from "../loader/Loader";
+import Filters from "../filters/Filters";
 
 function App() {
     const {auth} = useContext(Context)
     const [user, loading] = useAuthState(auth)
-    const [favouriteList, setFavouriteList] = useState([])
 
     return (
         <BrowserRouter>
             <div className="App">
-                <Navbar favouriteList={favouriteList}/>
-                <div className="anime-container">
+                <Navbar/>
+                <div className="anime-container d-flex">
                     {
                         loading
                         ? <Loader/>
-                        : <AppRouter favouriteList={favouriteList} setFavouriteList={setFavouriteList}/>
+                        : <AppRouter />
                     }
+                    {/*<Filters/>*/}
                 </div>
             </div>
         </BrowserRouter>

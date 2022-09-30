@@ -1,6 +1,7 @@
 import React, {createContext} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from "./components/app/App";
+import store from "./store/store";
 
 // Style
 import './styles/index.css';
@@ -10,6 +11,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import { getFirestore } from "firebase/firestore";
+import {Provider} from "react-redux";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCvYVMx78VA9U7W9RReskf4MDSGtWd9abM",
@@ -34,6 +36,8 @@ root.render(
         auth,
         firestore
     }}>
-        <App />
+        <Provider store={store}>
+            <App />
+        </Provider>
     </Context.Provider>
 );
