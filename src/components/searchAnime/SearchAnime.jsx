@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from "react-redux";
-import AnimeService from "../../services/AnimeService";
 
 const SearchAnime = () => {
     const [value, setValue] = useState('')

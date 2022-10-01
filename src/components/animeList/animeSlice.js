@@ -15,7 +15,6 @@ export const fetchAnime = createAsyncThunk(
         const data = await response.json()
         return data.data
     }
-
 )
 
 const animeSlice = createSlice({

@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
-
 import './animePage.scss';
 import AnimeService from "../../services/AnimeService";
 import Loader from "../loader/Loader";
@@ -9,16 +8,15 @@ const AnimePage = () => {
     const {animeId} = useParams()
     const {getOneAnime} = AnimeService()
     const [dataAnime, setDataAnime] = useState([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        getOneAnime(animeId).then(res => setDataAnime(res))
-        // onRequest(animeId)
+        getOneAnime(animeId)
+            .then(res => setDataAnime(res))
+            .then(() => setLoading(false))
     }, [])
 
-    // const onRequest =  (animeId) => {
-    //     getOneAnime(animeId).then(res => setDataAnime(res))
-    // }
-    if (dataAnime.length === 0) return <Loader/>
+    if (loading) return <Loader/>
 
     const {titles, description, posterImage, status, startDate, averageRating, episodeCount} = dataAnime
     return (

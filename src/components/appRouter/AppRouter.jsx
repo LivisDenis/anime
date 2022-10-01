@@ -6,7 +6,7 @@ import Favourite from "../favourite/Favourite";
 import Login from "../login/Login";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {Context} from "../../index";
-import {addFavourite, fetchAnime} from "../animeList/animeSlice";
+import {fetchAnime} from "../animeList/animeSlice";
 import {useDispatch} from "react-redux";
 
 const AppRouter = () => {
@@ -16,18 +16,14 @@ const AppRouter = () => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        onRequest(offset)
-    }, [offset])
-
-    const onRequest = (offset) => {
         dispatch(fetchAnime(offset))
-    }
+    }, [offset])
 
     return user ?
         (
-            <div>
+            <div className='w-100'>
                 <Routes>
-                    <Route path='/' element={<AnimeList addFavourite={addFavourite} setOffset={setOffset} />}/>
+                    <Route path='/' element={<AnimeList setOffset={setOffset}/>}/>
                     <Route path='/anime/:animeId' element={<AnimePage />}/>
                     <Route path='/favourite' element={<Favourite />}/>
                     <Route path='/favourite/:animeId' element={<AnimePage />}/>

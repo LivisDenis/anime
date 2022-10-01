@@ -10,15 +10,14 @@ export const apiSlice = createApi({
     endpoints: builder => ({
         getAnimeList: builder.query({
             query: (offset = 0) => `?page[limit]=6&page[offset]=${offset}`,
-            // '?page[limit]=${limit}&page[offset]=${offset}'
             providesTags: ['Anime']
         }),
-        getNewAnime: builder.mutation({
-            // query: (limit = 6, offset) => `?page[limit]=${limit}&page[offset]=${offset}`,
-            // invalidatesTags: ['Anime']
+        getSearchAnime: builder.mutation({
+            query: (name) => `?filter[text]=${name}`,
+            invalidatesTags: ['Anime']
         })
     })
 
 })
 
-export const { useGetAnimeListQuery, useGetNewAnimeMutation } = apiSlice
+export const { useGetAnimeListQuery, useGetSearchAnimeMutation } = apiSlice

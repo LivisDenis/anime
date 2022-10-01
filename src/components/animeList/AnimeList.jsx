@@ -13,7 +13,7 @@ const AnimeList = ({setOffset}) => {
     const {auth} = useContext(Context)
     const [user] = useAuthState(auth)
     const {getOneAnime} = AnimeService()
-    const animeData = useSelector(state => state.animeSlice.dataAnime)
+    const {dataAnime, animeLoadingStatus} = useSelector(state => state.animeSlice)
     const dispatch = useDispatch()
 
     const addFavourites = (title) => {
@@ -54,17 +54,22 @@ const AnimeList = ({setOffset}) => {
 
         return (
             <div className="cards">
-                <div className='d-flex align-content-start flex-wrap gap-5'>
+                <div className='d-flex align-content-start justify-content-center flex-wrap gap-5 mb-4'>
                     {items}
                 </div>
-                <button onClick={() => setOffset(offset => offset + 6)} className='btn btn-primary text-center btn-more'>MORE</button>
+                {animeLoadingStatus === 'loading'
+                    ? <Loader/>
+                    : <button
+                            onClick={() => setOffset(offset => offset + 6)}
+                            className='btn btn-primary text-center btn-more'>MORE</button>
+                }
             </div>
         )
     }
 
-    if (animeData.length === 0) return <Loader/>
+    if (dataAnime.length === 0) return <Loader/>
 
-    const elements = renderCards(animeData)
+    const elements = renderCards(dataAnime)
     return (
         <div>
             <h2>Anime</h2>
