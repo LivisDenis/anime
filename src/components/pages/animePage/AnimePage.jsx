@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link, useParams} from "react-router-dom";
 import Loader from "../../Loader";
 import {useSelector} from "react-redux";
+import {ANIME_LIST_ROUTE} from "../../../utils/consts";
 import './animePage.scss';
 
 const AnimePage = () => {
@@ -43,7 +44,7 @@ const AnimePage = () => {
                     <p className="single-anime__descr">{description}</p>
                 </div>
             </div>
-            <Link to='/' className="single-anime__back">Back to all</Link>
+            <Link to={ANIME_LIST_ROUTE} className="single-anime__back">Back to all</Link>
         </div>
     );
 };

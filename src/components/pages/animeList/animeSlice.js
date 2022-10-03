@@ -24,7 +24,7 @@ const animeSlice = createSlice({
             state.favorites = [...state.favorites, action.payload]
         },
         deleteAnime: (state, action) => {
-            state.favourites = state.favourites.filter(item => item.attributes.slug !== action.payload)
+            state.favorites = state.favorites.filter(item => item.attributes.slug !== action.payload)
         }
     },
     extraReducers: {
