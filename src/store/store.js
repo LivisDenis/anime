@@ -1,13 +1,13 @@
 import {configureStore} from "@reduxjs/toolkit";
-import {apiSlice} from "../api/apiSlice";
-import animeSlice from "../components/animeList/animeSlice";
+import animeSlice from "../components/pages/animeList/animeSlice";
+import searchSlice from "../components/pages/animeSearch/searchSlice";
 
 const store = configureStore({
     reducer: {
         animeSlice,
-        [apiSlice.reducerPath]: apiSlice.reducer
+        searchSlice
     },
-    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
+    middleware: getDefaultMiddleware => getDefaultMiddleware(),
     devTools: process.env.NODE_ENV !== 'production'
 })
 

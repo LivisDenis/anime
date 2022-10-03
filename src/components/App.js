@@ -1,11 +1,10 @@
-import Navbar from "../navbar/Navbar";
+import Navbar from "./navbar/Navbar";
 import {BrowserRouter} from "react-router-dom";
 import {useContext} from "react";
-import AppRouter from "../appRouter/AppRouter";
-import {Context} from "../../index";
+import AppRouter from "./AppRouter";
+import {Context} from "../index";
 import {useAuthState} from "react-firebase-hooks/auth";
-import Loader from "../loader/Loader";
-import Filters from "../filters/Filters";
+import Loader from "./Loader";
 
 function App() {
     const {auth} = useContext(Context)
@@ -19,9 +18,8 @@ function App() {
                     {
                         loading
                         ? <Loader/>
-                        : <AppRouter />
+                        : <AppRouter/>
                     }
-                    {/*<Filters/>*/}
                 </div>
             </div>
         </BrowserRouter>

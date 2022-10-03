@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {Context} from "../../index";
+import {Context} from "../../../index";
 import {GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 
 const Login = () => {

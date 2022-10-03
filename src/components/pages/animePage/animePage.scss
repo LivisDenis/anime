@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     column-gap: 50px;
-    align-items: start;
+    align-items: flex-start;
     &__body {
         flex: 1 1 auto;
         display: flex;

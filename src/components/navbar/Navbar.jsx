@@ -1,11 +1,9 @@
 import React, {useContext} from 'react';
 import {Link} from "react-router-dom";
-
-import './navbar.scss';
 import {Context} from "../../index";
 import {useAuthState} from "react-firebase-hooks/auth";
 import {useSelector} from "react-redux";
-import SearchAnime from "../searchAnime/SearchAnime";
+import './navbar.scss';
 
 const Navbar = () => {
     const {auth} = useContext(Context)
@@ -17,7 +15,9 @@ const Navbar = () => {
             <div className="container-fluid">
                 <Link to='/' className="navbar-brand">Anime</Link>
                 <div className="d-flex gap-3">
-                    <SearchAnime/>
+                    <Link to='/search' className="btn btn-light btn-favourite">
+                        Search
+                    </Link>
                     <Link to='/favourite' className="btn btn-dark btn-favourite">
                         <span className='amount'>{favourite.length}</span>
                         Favourite
