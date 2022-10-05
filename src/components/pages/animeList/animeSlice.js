@@ -10,10 +10,12 @@ export const fetchAnime = createAsyncThunk(
     }
 )
 
+
 const initialState = {
     dataAnime: [],
     animeLoadingStatus: 'idle',
-    favorites: []
+    favorites: [],
+    animePage: []
 }
 
 const animeSlice = createSlice({

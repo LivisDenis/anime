@@ -12,12 +12,14 @@ const AnimeSearch = () => {
     const {auth} = useContext(Context)
     const [user] = useAuthState(auth)
     const [value, setValue] = useState('')
+    const [searchQuery, setSearchQuery] = useState('')
     const {searchAnime, animeLoadingStatus} = useSelector(state => state.searchSlice)
     const dispatch = useDispatch()
 
     const search = (e) => {
         e.preventDefault()
         dispatch(fetchSearchAnime(value))
+        setSearchQuery(value)
         setValue('')
     }
 
@@ -50,6 +52,7 @@ const AnimeSearch = () => {
             <h2>Search</h2>
             <hr/>
             <InputSearch value={value} setValue={setValue} search={search}/>
+            <h2 className='mt-3'>Query search: {searchQuery}</h2>
             <hr/>
             <div>
                 {animeLoadingStatus === 'loading'

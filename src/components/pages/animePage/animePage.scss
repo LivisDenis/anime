@@ -36,3 +36,15 @@
         line-height: 24px;
     }
 }
+.anime-page__image {
+    position: relative;
+    padding-top: 20%;
+}
+.single-anime-cover__image {
+    position: absolute;
+    top: -40px;
+    left: -60px;
+    width: 120%;
+    height: 100%;
+    object-fit: cover;
+}
